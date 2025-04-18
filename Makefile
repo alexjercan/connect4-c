@@ -1,11 +1,11 @@
 CC = clang
-CFLAGS = -Wall -Wextra -pedantic -std=c11 -g
+CFLAGS = -Wall -Wextra -std=c11 -g
 SRC = src
 OUT = out
 
 .PHONY: all clean
 
-all: $(OUT)/main
+all: $(OUT)/main $(OUT)/librandom.so
 
 $(OUT)/main: $(OUT)/main.o $(OUT)/connect4.o | $(OUT)
 	$(CC) $(CFLAGS) $^ -o $@
@@ -15,6 +15,12 @@ $(OUT)/main.o: $(SRC)/main.c | $(OUT)
 
 $(OUT)/connect4.o: $(SRC)/connect4.c $(SRC)/ds.h | $(OUT)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OUT)/librandom.so: $(OUT)/random.o $(OUT)/connect4.o | $(OUT)
+	$(CC) -shared -fPIC $^ -o $@
+
+$(OUT)/random.o: $(SRC)/random.c | $(OUT)
+	$(CC) $(CFLAGS) -fPIC -c $< -o $@
 
 $(OUT):
 	mkdir -p $@
