@@ -5,7 +5,7 @@ OUT = out
 
 .PHONY: all clean
 
-all: $(OUT)/main $(OUT)/librandom.so
+all: $(OUT)/main $(OUT)/librandom.so $(OUT)/libplayer.so
 
 $(OUT)/main: $(OUT)/main.o $(OUT)/connect4.o | $(OUT)
 	$(CC) $(CFLAGS) $^ -o $@
@@ -20,6 +20,12 @@ $(OUT)/librandom.so: $(OUT)/random.o $(OUT)/connect4.o | $(OUT)
 	$(CC) -shared -fPIC $^ -o $@
 
 $(OUT)/random.o: $(SRC)/random.c | $(OUT)
+	$(CC) $(CFLAGS) -fPIC -c $< -o $@
+
+$(OUT)/libplayer.so: $(OUT)/player.o $(OUT)/connect4.o | $(OUT)
+	$(CC) -shared -fPIC $^ -o $@
+
+$(OUT)/player.o: $(SRC)/player.c | $(OUT)
 	$(CC) $(CFLAGS) -fPIC -c $< -o $@
 
 $(OUT):
