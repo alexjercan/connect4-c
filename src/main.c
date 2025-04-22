@@ -128,7 +128,7 @@ int main(int argc, char **argv) {
     while (1) {
         move = move_player(board, player);
         if (move == -1 || connect4_update_board(&board, move, player) == -1) {
-            printf("Invalid move for player %d.\n", player);
+            printf("Invalid move for player %d (%d).\n", player, move);
             result = swap_player(player);
             break;
         }
