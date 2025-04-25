@@ -37,7 +37,7 @@ jobs:
         run: npm install
       - name: Create the dist package
         run: |
-          alias clang-19=clang
+          sudo ln -s /usr/bin/clang /usr/bin/clang-19
           npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
