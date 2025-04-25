@@ -9,5 +9,12 @@ player strategies using Dynamic Link Libraries (DLLs).
 
 ```console
 make
-LD_LIBRARY_PATH=out ./out/main ./out/librandom.so ./out/libplayer.so
+LD_LIBRARY_PATH=dist ./dist/main ./dist/libplayer.so ./dist/libminmax.so
+```
+
+or WASM build (player vs minmax):
+
+```console
+npm run serve
+# open http://localhost:8080
 ```
