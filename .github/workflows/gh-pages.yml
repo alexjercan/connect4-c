@@ -29,14 +29,16 @@ jobs:
       - name: Setup clang
         uses: egor-tensin/setup-clang@v1
         with:
-          version: 19
+          version: latest
           platform: x64
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Install npm dependencies
         run: npm install
       - name: Create the dist package
-        run: npm run build
+        run: |
+          alias clang-19=clang
+          npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
