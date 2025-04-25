@@ -1,9 +1,19 @@
-#include <stdlib.h>
-#include "ds.h"
 #include "connect4.h"
 
+#ifdef __wasm__
+
+#include "wasm.h"
+
+int rand(void) {
+    return js_random(0, 2147483647);
+}
+
+#else
+#include <stdlib.h>
+#endif
+
 #ifndef MINMAX_DEPTH
-#define MINMAX_DEPTH 5
+#define MINMAX_DEPTH 9
 #endif
 
 #define MINMAX_INF 1000000
@@ -103,7 +113,7 @@ static move_score minmax(const connect4_board_t board, char player, char maxxing
                 }
             }
             if (connect4_update_board(&copy, i, player) == -1) {
-                DS_PANIC(DS_ERROR_UNREACHABLE);
+                break;
             }
             move_score value = minmax(copy, swap_player(player), maxxing, depth - 1, alpha, beta);
 

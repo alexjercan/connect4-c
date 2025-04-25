@@ -1,7 +1,7 @@
 CC = clang
 CFLAGS = -Wall -Wextra -std=c11 -g
 SRC = src
-OUT = out
+OUT = dist
 
 .PHONY: all clean
 

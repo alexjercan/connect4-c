@@ -10,7 +10,6 @@
 
 typedef char connect4_board_t[CONNECT4_WIDTH][CONNECT4_HEIGHT];
 
-void connect4_display(const connect4_board_t board);
 char connect4_check_win_or_draw(const connect4_board_t board);
 int connect4_is_column_full(const connect4_board_t board, int column);
 int connect4_update_board(connect4_board_t *board, int column, char player);

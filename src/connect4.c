@@ -1,33 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "connect4.h"
-#include "ds.h"
-
-void connect4_display(const connect4_board_t board) {
-    fprintf(stdout, "\n");
-    for (int i = 0; i < CONNECT4_HEIGHT; i++) {
-        for (int j = 0; j < CONNECT4_WIDTH; j++) {
-            fprintf(stdout, "+---");
-        }
-        fprintf(stdout, "+\n");
-        for (int j = 0; j < CONNECT4_WIDTH; j++) {
-            fprintf(stdout, "| ");
-            if (board[j][i] == CONNECT4_PLAYER1) fprintf(stdout, DS_TERMINAL_RED"x"DS_TERMINAL_RESET);
-            else if (board[j][i] == CONNECT4_PLAYER2) fprintf(stdout, DS_TERMINAL_BLUE"o"DS_TERMINAL_RESET);
-            else fprintf(stdout, " ");
-            fprintf(stdout, " ");
-        }
-        fprintf(stdout, "|\n");
-    }
-    for (int i = 0; i < CONNECT4_WIDTH; i++) {
-        fprintf(stdout, "+---");
-    }
-    fprintf(stdout, "+\n");
-    for (int i = 0; i < CONNECT4_WIDTH; i++) {
-        fprintf(stdout, "  %d ", i + 1);
-    }
-    fprintf(stdout, " \n");
-}
 
 static char connect4_check_winner(const connect4_board_t board) {
     // check horizontal
@@ -100,11 +71,11 @@ int connect4_update_board(connect4_board_t *board, int column, char player) {
     int result = 0;
 
     if (column < 0 || column >= CONNECT4_WIDTH) {
-        return_defer(-1);
+        return -1;
     }
 
     if (connect4_is_column_full(*board, column) == 1) {
-        return_defer(-1);
+        return -1;
     }
 
     for (int i = CONNECT4_HEIGHT - 1; i >= 0; i--) {
@@ -114,6 +85,5 @@ int connect4_update_board(connect4_board_t *board, int column, char player) {
         }
     }
 
-defer:
     return result;
 }

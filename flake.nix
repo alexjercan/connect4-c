@@ -1,5 +1,5 @@
 {
-  description = "A shell for my C project";
+  description = "A shell for my C WASM project";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -21,8 +21,9 @@
         name = "env-shell";
 
         nativeBuildInputs = with pkgs; [
+          nodejs
           clang
-          valgrind
+          lld
         ];
       };
   };
